@@ -2,10 +2,10 @@ resource "azurerm_storage_account" "main" {
   name                     = var.storage_account.name
   resource_group_name      = data.azurerm_resource_group.main.name
   location                 = data.azurerm_resource_group.main.location
-  account_tier             = var.storage_account.access_tier
+  account_tier             = var.storage_account.account_tier
   account_replication_type = var.storage_account.account_replication_type
 
-  account_kind = lower(var.storage_account.access_tier) == "premium" ? "BlockBlobStorage" : null
+  account_kind = lower(var.storage_account.account_tier) == "premium" ? "BlockBlobStorage" : null
 
   enable_https_traffic_only = true
   min_tls_version           = "TLS1_2"
