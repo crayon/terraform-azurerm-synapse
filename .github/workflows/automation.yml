@@ -15,12 +15,13 @@ jobs:
     
     - name: Project automation
       if: github.event_name == 'issues' || github.event_name == 'pull_request'
-      uses: crayon/project-github-action@v1.0.0-beta1
+      uses: crayon/project-github-action@v1.0.0-beta3
       with:
-        project_number: 7
+        project_number: 12
+        organization: 'crayon'
         task_id: ${{ github.event.pull_request.node_id || github.event.issue.node_id }}
         repo-token: ${{ secrets.GHBOT_TOKEN }}
-        
+
     - name: Mark stale issues and pull requests
       uses: actions/stale@v3
       if: github.event_name == 'schedule'
