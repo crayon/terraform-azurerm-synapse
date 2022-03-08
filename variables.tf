@@ -46,5 +46,5 @@ variable "dedicated_sql_pool" {
 
 variable "tags" {
   description = "A map object used for all resources in the module."
-  type        = list(map)
+  type        = map(string)
 }
