@@ -35,3 +35,11 @@ resource "azurerm_synapse_firewall_rule" "main" {
   start_ip_address = each.value.start_ip_address
   end_ip_address   = each.value.end_ip_address
 }
+
+resource "azurerm_synapse_role_assignment" "roles" {
+  for_each = { for ra in var.role_assignment : ra.role_name => ra }
+
+  synapse_workspace_id = azurerm_synapse_workspace.main.id
+  role_name            = each.value.role_name
+  principal_id         = each.value.principal_id
+}
