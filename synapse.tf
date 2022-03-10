@@ -26,3 +26,12 @@ resource "azurerm_synapse_sql_pool" "main" {
     azurerm_synapse_workspace.main
   ]
 }
+
+resource "azurerm_synapse_firewall_rule" "main" {
+  for_each             = { for fr in var.synapse_firewall_rule : fr.name => fr }
+  synapse_workspace_id = azurerm_synapse_workspace.main.id
+
+  name             = each.value.name
+  start_ip_address = each.value.start_ip_address
+  end_ip_address   = each.value.end_ip_address
+}

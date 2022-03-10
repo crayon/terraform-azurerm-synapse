@@ -44,6 +44,16 @@ variable "dedicated_sql_pool" {
   default = []
 }
 
+variable "synapse_firewall_rule" {
+  description = "List of objects to create Synapse firewall rules."
+  type = list(object({
+    name             = string
+    start_ip_address = string
+    end_ip_address   = string
+  }))
+  default = []
+}
+
 variable "tags" {
   description = "A map object used for all resources in the module."
   type        = map(string)
