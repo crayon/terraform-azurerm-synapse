@@ -54,6 +54,15 @@ variable "synapse_firewall_rule" {
   default = []
 }
 
+variable "role_assignment" {
+  description = "A list of objects to to assign roles to the Synapse workspace."
+  type = list(object({
+    role_name    = string
+    principal_id = string
+  }))
+  default = []
+}
+
 variable "tags" {
   description = "A map object used for all resources in the module."
   type        = map(string)
