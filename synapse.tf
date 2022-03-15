@@ -37,7 +37,7 @@ resource "azurerm_synapse_firewall_rule" "main" {
 }
 
 resource "azurerm_synapse_role_assignment" "roles" {
-  for_each = { for ra in var.role_assignment : ra.role_name => ra }
+  for_each = { for ra in var.role_assignment : ra.principal_id => ra }
 
   synapse_workspace_id = azurerm_synapse_workspace.main.id
   role_name            = each.value.role_name
