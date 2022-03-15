@@ -12,14 +12,18 @@ resource "azurerm_synapse_workspace" "main" {
 
   purview_id = var.purview_id
 
-  azure_devops_repo {
-    account_name = var.azure_devops_repo.account_name
-    branch_name  = var.azure_devops_repo.branch_name
-    #last_commit_id  = var.azure_devops_repo.last_commit_id
-    project_name    = var.azure_devops_repo.project_name
-    repository_name = var.azure_devops_repo.repository_name
-    root_folder     = var.azure_devops_repo.root_folder
-    tenant_id       = var.azure_devops_repo.tenant_id
+
+  dynamic "azure_devops_repo" {
+    for_each = var.azure_devops_repo
+    value {
+      account_name = var.azure_devops_repo.account_name
+      branch_name  = var.azure_devops_repo.branch_name
+      #last_commit_id  = var.azure_devops_repo.last_commit_id
+      project_name    = var.azure_devops_repo.project_name
+      repository_name = var.azure_devops_repo.repository_name
+      root_folder     = var.azure_devops_repo.root_folder
+      tenant_id       = var.azure_devops_repo.tenant_id
+    }
   }
 
   tags = var.tags
