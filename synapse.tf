@@ -15,7 +15,7 @@ resource "azurerm_synapse_workspace" "main" {
 
   dynamic "azure_devops_repo" {
     for_each = var.azure_devops_repo
-    value {
+    content {
       account_name = var.azure_devops_repo.account_name
       branch_name  = var.azure_devops_repo.branch_name
       #last_commit_id  = var.azure_devops_repo.last_commit_id
