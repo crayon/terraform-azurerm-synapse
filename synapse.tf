@@ -10,6 +10,8 @@ resource "azurerm_synapse_workspace" "main" {
 
   managed_virtual_network_enabled = true
 
+  purview_id = var.purview_id
+
   azure_devops_repo {
     account_name = var.azure_devops_repo.account_name
     branch_name  = var.azure_devops_repo.branch_name
