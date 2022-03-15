@@ -10,6 +10,16 @@ resource "azurerm_synapse_workspace" "main" {
 
   managed_virtual_network_enabled = true
 
+  azure_devops_repo {
+    account_name = var.azure_devops_repo.account_name
+    branch_name  = var.azure_devops_repo.branch_name
+    #last_commit_id  = var.azure_devops_repo.last_commit_id
+    project_name    = var.azure_devops_repo.project_name
+    repository_name = var.azure_devops_repo.repository_name
+    root_folder     = var.azure_devops_repo.root_folder
+    tenant_id       = var.azure_devops_repo.tenant_id
+  }
+
   tags = var.tags
 }
 

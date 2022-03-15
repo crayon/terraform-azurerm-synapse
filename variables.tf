@@ -1,6 +1,8 @@
 variable "name" {
   description = "Name used for the deployment. All resources prefixed based on the Azure naming convention."
+  type        = string
 }
+
 variable "resource_group_name" {
   description = "The resource group you want to deploy to."
   type        = string
@@ -42,6 +44,19 @@ variable "dedicated_sql_pool" {
     create_mode = string
   }))
   default = []
+}
+
+variable "azure_devops_repo" {
+  description = "Definition of the Azure DevOps repository used with Synapse."
+  type = object({
+    account_name    = string
+    branch_name     = string
+    project_name    = string
+    repository_name = string
+    root_folder     = string
+    tenant_id       = string
+  })
+  default = null
 }
 
 variable "synapse_firewall_rule" {
