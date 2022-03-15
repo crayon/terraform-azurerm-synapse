@@ -28,6 +28,12 @@ variable "adls_filesystem" {
   default     = ["data"]
 }
 
+variable "purview_id" {
+  description = "The ID for the instance of Purview used with this Synapse workspace."
+  type        = string
+  default     = null
+}
+
 variable "sql_administrator" {
   description = "Username and password used for Synapse."
   type = object({
