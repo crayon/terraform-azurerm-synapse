@@ -1,8 +1,7 @@
 resource "azurerm_synapse_spark_pool" "pools" {
   for_each = { for sp in var.synapse_spark_pool : sp.name => sp }
 
-  synapse_workspace_id                 = azurerm_synapse_workspace.main
-  storage_data_lake_gen2_filesystem_id = azurerm_storage_data_lake_gen2_filesystem.main[var.adls_filesystem[0]].id
+  synapse_workspace_id = azurerm_synapse_workspace.main
 
   name             = each.value.name
   node_size_family = each.value.node_size_family
