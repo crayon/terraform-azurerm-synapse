@@ -1,7 +1,7 @@
 resource "azurerm_storage_account" "main" {
   name                     = var.storage_account.name
-  resource_group_name      = data.azurerm_resource_group.main.name
-  location                 = data.azurerm_resource_group.main.location
+  resource_group_name      = var.resource_group_name
+  location                 = var.location
   account_tier             = var.storage_account.account_tier
   account_replication_type = var.storage_account.account_replication_type
 
@@ -9,7 +9,7 @@ resource "azurerm_storage_account" "main" {
 
   enable_https_traffic_only = true
   min_tls_version           = "TLS1_2"
-  allow_blob_public_access  = false
+  allow_blob_public_access  = var.storage_account.allow_blob_public_access
 
   is_hns_enabled = true
 

@@ -1,7 +1,7 @@
 resource "azurerm_synapse_workspace" "main" {
   name                = format("syn-%s", var.name)
-  resource_group_name = data.azurerm_resource_group.main.name
-  location            = data.azurerm_resource_group.main.location
+  resource_group_name = var.resource_group_name
+  location            = var.location
 
   storage_data_lake_gen2_filesystem_id = azurerm_storage_data_lake_gen2_filesystem.main[var.adls_filesystem[0]].id
 

@@ -8,12 +8,18 @@ variable "resource_group_name" {
   type        = string
 }
 
+variable "location" {
+  description = "Location used for all resources."
+  type        = string
+}
+
 variable "storage_account" {
   description = "Settings used when creating the Storage Account."
   type = object({
     name                     = string
     account_tier             = string
     account_replication_type = string
+    allow_blob_public_access = bool
   })
 
   validation {
@@ -43,11 +49,35 @@ variable "sql_administrator" {
 }
 
 variable "dedicated_sql_pool" {
-  description = "List of dedicated SQL pools"
+  description = "List of dedicated SQL pools."
   type = list(object({
     name        = string
     sku_name    = string
     create_mode = string
+  }))
+  default = []
+}
+
+variable "synapse_spark_pool" {
+  description = "List of Synapse Spark pools."
+  type = list(object({
+    name                        = string
+    node_size_family            = string
+    node_size                   = string
+    cache_size                  = number
+    auto_pause_delay_in_minutes = number
+    auto_scale = object({
+      max_node_count = number
+      min_node_count = number
+    })
+    library_requirement = object({
+      content  = string
+      filename = string
+    })
+    spark_config = object({
+      content  = string
+      filename = string
+    })
   }))
   default = []
 }
