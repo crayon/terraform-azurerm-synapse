@@ -12,7 +12,6 @@ resource "azurerm_synapse_workspace" "main" {
 
   purview_id = var.purview_id
 
-
   dynamic "azure_devops_repo" {
     for_each = var.azure_devops_repo != null ? ["repo"] : []
     content {
@@ -23,6 +22,15 @@ resource "azurerm_synapse_workspace" "main" {
       repository_name = var.azure_devops_repo.repository_name
       root_folder     = var.azure_devops_repo.root_folder
       tenant_id       = var.azure_devops_repo.tenant_id
+    }
+  }
+
+  dynamic "lifecycle" {
+    for_each = contains(var.ignore_changes, "last_commit_id") != false ? ["ignore"] : []
+    content {
+      ignore_changes = [
+        azurerm_synapse_workspace.main.azure_devops_repo.last_commit_id
+      ]
     }
   }
 
