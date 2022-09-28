@@ -114,6 +114,12 @@ variable "role_assignment" {
   default = []
 }
 
+variable "ignore_changes" {
+  description = "(Experimental) A list of objects that we should ignore the changes for."
+  type        = list(string)
+  default     = []
+}
+
 variable "tags" {
   description = "A map object used for all resources in the module."
   type        = map(string)

@@ -12,7 +12,6 @@ resource "azurerm_synapse_workspace" "main" {
 
   purview_id = var.purview_id
 
-
   dynamic "azure_devops_repo" {
     for_each = var.azure_devops_repo != null ? ["repo"] : []
     content {
@@ -24,6 +23,12 @@ resource "azurerm_synapse_workspace" "main" {
       root_folder     = var.azure_devops_repo.root_folder
       tenant_id       = var.azure_devops_repo.tenant_id
     }
+  }
+
+  lifecycle {
+    ignore_changes = [
+      azure_devops_repo[0].last_commit_id
+    ]
   }
 
   tags = var.tags
