@@ -23,9 +23,12 @@ resource "azurerm_synapse_spark_pool" "pools" {
     filename = each.value.library_requirement.filename
   }
 
-  spark_config {
-    content  = each.value.spark_config.content
-    filename = each.value.spark_config.filename
+  dynamic "spark_config" {
+    for_each = each.value.spark_config != null ? ["spark_config"] : []
+    content {
+      content  = each.value.spark_config.content
+      filename = each.value.spark_config.filename
+    }
   }
 
   tags = var.tags
