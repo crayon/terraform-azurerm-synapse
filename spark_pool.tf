@@ -35,4 +35,10 @@ resource "azurerm_synapse_spark_pool" "pools" {
   }
 
   tags = var.tags
+
+  lifecycle {
+    ignore_changes = [
+      dynamic_executor_allocation_enabled
+    ]
+  }
 }
