@@ -25,10 +25,20 @@ resource "azurerm_synapse_workspace" "main" {
     }
   }
 
+<<<<<<< HEAD
   lifecycle {
     ignore_changes = [
       azure_devops_repo.last_commit_id
     ]
+=======
+  dynamic "lifecycle" {
+    for_each = contains(var.ignore_changes, "last_commit_id") != false ? ["ignore"] : []
+    content {
+      ignore_changes = [
+        azurerm_synapse_workspace.main.azure_devops_repo.last_commit_id
+      ]
+    }
+>>>>>>> parent of cc2b137 (feat(lifecycle): added last_commit_id to ignore_changes)
   }
 
   tags = var.tags
