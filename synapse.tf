@@ -27,7 +27,7 @@ resource "azurerm_synapse_workspace" "main" {
 
   lifecycle {
     ignore_changes = [
-      azure_devops_repo[0].last_commit_id
+      azure_devops_repo.last_commit_id
     ]
   }
 
