@@ -25,13 +25,10 @@ resource "azurerm_synapse_workspace" "main" {
     }
   }
 
-  dynamic "lifecycle" {
-    for_each = contains(var.ignore_changes, "last_commit_id") != false ? ["ignore"] : []
-    content {
-      ignore_changes = [
-        azurerm_synapse_workspace.main.azure_devops_repo.last_commit_id
-      ]
-    }
+  lifecycle {
+    ignore_changes = [
+      azure_devops_repo[0].last_commit_id
+    ]
   }
 
   tags = var.tags
