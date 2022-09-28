@@ -61,13 +61,14 @@ variable "dedicated_sql_pool" {
 variable "synapse_spark_pool" {
   description = "List of Synapse Spark pools."
   type = list(object({
-    name                        = string
-    node_size_family            = string
-    node_size                   = string
-    cache_size                  = number
-    auto_pause_delay_in_minutes = number
-    spark_version               = optional(number)
-    node_count                  = optional(number)
+    name                           = string
+    node_size_family               = string
+    node_size                      = string
+    cache_size                     = number
+    auto_pause_delay_in_minutes    = number
+    session_level_packages_enabled = optional(bool)
+    spark_version                  = optional(number)
+    node_count                     = optional(number)
     auto_scale = optional(object({
       max_node_count = number
       min_node_count = number

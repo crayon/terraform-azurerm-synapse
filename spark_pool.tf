@@ -3,12 +3,13 @@ resource "azurerm_synapse_spark_pool" "pools" {
 
   synapse_workspace_id = azurerm_synapse_workspace.main.id
 
-  name             = each.value.name
-  node_size_family = each.value.node_size_family
-  node_size        = each.value.node_size
-  node_count       = each.value.node_count
-  cache_size       = each.value.cache_size
-  spark_version    = each.value.spark_version
+  name                           = each.value.name
+  node_size_family               = each.value.node_size_family
+  node_size                      = each.value.node_size
+  node_count                     = each.value.node_count
+  cache_size                     = each.value.cache_size
+  spark_version                  = each.value.spark_version
+  session_level_packages_enabled = each.value.session_level_packages_enabled
 
   auto_scale {
     max_node_count = each.value.auto_scale.max_node_count
