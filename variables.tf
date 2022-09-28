@@ -66,18 +66,20 @@ variable "synapse_spark_pool" {
     node_size                   = string
     cache_size                  = number
     auto_pause_delay_in_minutes = number
-    auto_scale = object({
+    spark_version               = optional(number)
+    node_count                  = optional(number)
+    auto_scale = optional(object({
       max_node_count = number
       min_node_count = number
-    })
-    library_requirement = object({
+    }))
+    library_requirement = optional(object({
       content  = string
       filename = string
-    })
-    spark_config = object({
+    }))
+    spark_config = optional(object({
       content  = string
       filename = string
-    })
+    }))
   }))
   default = []
 }

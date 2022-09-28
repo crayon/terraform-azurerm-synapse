@@ -7,6 +7,7 @@ resource "azurerm_synapse_spark_pool" "pools" {
   node_size_family = each.value.node_size_family
   node_size        = each.value.node_size
   cache_size       = each.value.cache_size
+  spark_version    = each.value.spark_version
 
   auto_scale {
     max_node_count = each.value.auto_scale.max_node_count
