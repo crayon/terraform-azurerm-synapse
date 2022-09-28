@@ -6,6 +6,7 @@ resource "azurerm_synapse_spark_pool" "pools" {
   name             = each.value.name
   node_size_family = each.value.node_size_family
   node_size        = each.value.node_size
+  node_count       = each.value.node_count
   cache_size       = each.value.cache_size
   spark_version    = each.value.spark_version
 
