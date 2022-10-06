@@ -3,14 +3,14 @@ resource "azurerm_synapse_spark_pool" "pools" {
 
   synapse_workspace_id = azurerm_synapse_workspace.main.id
 
-  name                                = each.value.name
-  node_size_family                    = each.value.node_size_family
-  node_size                           = each.value.node_size
-  node_count                          = each.value.node_count
-  cache_size                          = each.value.cache_size
-  spark_version                       = each.value.spark_version
-  session_level_packages_enabled      = each.value.session_level_packages_enabled
-  dynamic_executor_allocation_enabled = each.value.dynamic_executor_allocation_enabled
+  name                           = each.value.name
+  node_size_family               = each.value.node_size_family
+  node_size                      = each.value.node_size
+  node_count                     = each.value.node_count
+  cache_size                     = each.value.cache_size
+  spark_version                  = each.value.spark_version
+  session_level_packages_enabled = each.value.session_level_packages_enabled
+  #dynamic_executor_allocation_enabled = each.value.dynamic_executor_allocation_enabled
 
   auto_scale {
     max_node_count = each.value.auto_scale.max_node_count
@@ -21,9 +21,12 @@ resource "azurerm_synapse_spark_pool" "pools" {
     delay_in_minutes = each.value.auto_pause_delay_in_minutes
   }
 
-  library_requirement {
-    content  = each.value.library_requirement.content
-    filename = each.value.library_requirement.filename
+  dynamic "library_requirement" {
+    for_each = each.value.library_requirement.content != null ? ["enabled"] : []
+    content {
+      content  = each.value.library_requirement.content
+      filename = each.value.library_requirement.filename
+    }
   }
 
   dynamic "spark_config" {
