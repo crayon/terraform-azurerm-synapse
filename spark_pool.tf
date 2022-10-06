@@ -12,9 +12,13 @@ resource "azurerm_synapse_spark_pool" "pools" {
   session_level_packages_enabled = each.value.session_level_packages_enabled
   #dynamic_executor_allocation_enabled = each.value.dynamic_executor_allocation_enabled
 
-  auto_scale {
-    max_node_count = each.value.auto_scale.max_node_count
-    min_node_count = each.value.auto_scale.min_node_count
+  dynamic "auto_scale" {
+    for_each = each.value.node_count == null ? ["auto_scale"] : []
+
+    content {
+      max_node_count = each.value.auto_scale.max_node_count
+      min_node_count = each.value.auto_scale.min_node_count
+    }
   }
 
   auto_pause {
