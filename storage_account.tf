@@ -7,9 +7,9 @@ resource "azurerm_storage_account" "main" {
 
   account_kind = lower(var.storage_account.account_tier) == "premium" ? "BlockBlobStorage" : null
 
-  enable_https_traffic_only = true
-  min_tls_version           = "TLS1_2"
-  allow_blob_public_access  = var.storage_account.allow_blob_public_access
+  enable_https_traffic_only       = true
+  min_tls_version                 = "TLS1_2"
+  allow_nested_items_to_be_public = var.storage_account.allow_nested_items_to_be_public
 
   is_hns_enabled = true
 

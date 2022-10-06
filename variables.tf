@@ -16,10 +16,10 @@ variable "location" {
 variable "storage_account" {
   description = "Settings used when creating the Storage Account."
   type = object({
-    name                     = string
-    account_tier             = string
-    account_replication_type = string
-    allow_blob_public_access = bool
+    name                            = string
+    account_tier                    = string
+    account_replication_type        = string
+    allow_nested_items_to_be_public = bool
   })
 
   validation {
