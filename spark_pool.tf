@@ -26,7 +26,7 @@ resource "azurerm_synapse_spark_pool" "pools" {
   }
 
   dynamic "library_requirement" {
-    for_each = each.value.library_requirement.content != null ? ["enabled"] : []
+    for_each = each.value.library_requirement != null ? ["enabled"] : []
     content {
       content  = each.value.library_requirement.content
       filename = each.value.library_requirement.filename
