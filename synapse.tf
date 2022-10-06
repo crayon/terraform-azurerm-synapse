@@ -3,6 +3,10 @@ resource "azurerm_synapse_workspace" "main" {
   resource_group_name = var.resource_group_name
   location            = var.location
 
+  identity {
+    type = "SystemAssigned"
+  }
+
   storage_data_lake_gen2_filesystem_id = azurerm_storage_data_lake_gen2_filesystem.main[var.adls_filesystem[0]].id
 
   sql_administrator_login          = var.sql_administrator.login
