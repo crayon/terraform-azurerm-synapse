@@ -68,3 +68,9 @@ resource "azurerm_synapse_role_assignment" "roles" {
   role_name            = each.value.role_name
   principal_id         = each.value.principal_id
 }
+
+resource "azurerm_role_assignment" "synapse_adls" {
+  scope                = azurerm_storage_account.main.id
+  role_definition_name = "Storage Blob Data Contributor"
+  principal_id         = azurerm_synapse_workspace.main.identity[0].principal_id
+}
