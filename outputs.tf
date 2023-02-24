@@ -1,3 +1,8 @@
+output "synapse_sql_on_demand_endpoint" {
+  description = "Connectivity endpoint for Synapse's on demand SQL pool."
+  value       = azurerm_synapse_workspace.main.connectivity_endpoints.sqlOnDemand
+}
+
 output "synapse_workspace_id" {
   description = "Synapse workspace resource ID."
   value       = azurerm_synapse_workspace.main.id
